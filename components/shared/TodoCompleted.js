@@ -6,6 +6,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 
 
 const TodoCompleted = ({ todo }) => {
+    
   return (
     <Form action={completed}>
       <Input name="inputId" value={todo.id} className="border-gray-700" type="hidden" />

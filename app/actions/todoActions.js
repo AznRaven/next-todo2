@@ -32,8 +32,8 @@ export async function completed(formData) {
     },
   });
 
-  if (!todo){
-    return
+  if (!todo) {
+    return;
   }
   const updatedStatus = !todo.isCompleted;
 
@@ -48,4 +48,30 @@ export async function completed(formData) {
   revalidatePath("/");
 
   return updatedStatus;
+}
+
+export async function edit(formData) {
+  const input = formData.get("newTitle");
+  const inputId = formData.get("inputId");
+
+  await prisma.todo.update({
+    where: {
+      id: inputId,
+    },
+    data: {
+      title: input,
+    },
+  });
+  revalidatePath("/");
+}
+
+export async function deleteTodo(formData) {
+  const inputId = formData.get("inputId");
+
+  await prisma.todo.delete({
+    where: {
+      id: inputId,
+    },
+  });
+  revalidatePath('/')
 }
